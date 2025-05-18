@@ -1,0 +1,16 @@
+<h2>대출 이력: {{ book.title }}</h2>
+<ul>
+    {% for history in histories %}
+    <li>
+        {{ history.user.username }} - {{ history.borrowed_at|date:"Y-m-d H:i"}}
+        {% if history.returned_at %}
+            (반납: {{ history.returned_at|date:"Y-m-d"}})
+        {% else %}
+            미반납
+        {% endif %}
+    </li>
+    {% empty %}
+        <li>대출 이력이 없습니다.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'library:book_list' %}">← 책 목록으로</a>
